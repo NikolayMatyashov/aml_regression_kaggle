@@ -11,13 +11,22 @@ import feature_selection
 Z_train = pd.read_csv('data/train.csv', index_col='id')
 macro = pd.read_csv('data/macro.csv')
 
+Z_train = Z_train.merge(macro, on=['timestamp'], how='inner')
+
 Y = Z_train['price']
 X = Z_train.drop('price', axis=1)
 
 # Drop or encode string columns
+# transform timestamp to milliseconds
+X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
+
 X = X.join(pd.get_dummies(X['ecology'], prefix="ecology", drop_first=True))
 X = X.join(pd.get_dummies(X['product_type'], prefix="product_type", drop_first=True))
 X = X.drop(['ecology', 'product_type', 'sub_area'], axis=1)
+
+# Drop bugged features after merge
+X = X.drop(['child_on_acc_pre_school', 'modern_education_share',
+            'old_education_build_share'], axis=1)
 
 # # Take parameters without neighbours and macro
 # X = X.loc[:, ['full_sq', 'life_sq', 'floor', 'max_floor', 'material',
@@ -31,20 +40,12 @@ boolean_parametrs = ['culture_objects_top_25', 'thermal_power_plant_raion', 'inc
 for boolean_parametr in boolean_parametrs:
     X[boolean_parametr] = X[boolean_parametr].map(lambda x: 0 if 'no' or '' else 1)
 
-X = X[feature_selection.selected]
-X = X.merge(macro, on=['timestamp'], how='inner')
-
-# Drop bugged features after merge
-X = X.drop(['child_on_acc_pre_school', 'modern_education_share',
-            'old_education_build_share'], axis=1)
-
-# transform timestamp to milliseconds
-X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
-
 # Deal with NaNs
 for column in X.columns:
     X[column] = X[column].fillna((X[column].mean()))
 
+X = X[feature_selection.selected + feature_selection.macro_selected
+      + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3)
 
 
