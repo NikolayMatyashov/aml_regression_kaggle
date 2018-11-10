@@ -44,14 +44,13 @@ macro = pd.read_csv('data/macro.csv')
 
 Z_test = pd.read_csv('data/test.csv').merge(macro, on=['timestamp'], how='inner')
 Z_test = Z_test.set_index("id").sort_index()
+
 Z_train = pd.read_csv('data/train.csv', index_col='id').merge(macro, on=['timestamp'], how='inner')
 train_Y = Z_train['price']
 Z_train = Z_train.drop('price', axis=1)
 
 X_prepared = prepare_x(Z_train)
-
 X_test_prepared = prepare_x(Z_test)
-
 
 def get_normalised_data():
     X_scaled = preprocessing.MinMaxScaler().fit_transform(X_prepared.values)

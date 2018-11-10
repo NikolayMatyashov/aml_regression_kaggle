@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 
 from sklearn.ensemble import ExtraTreesRegressor
 
-import data_analyzing
-
 selected = ["full_sq", "num_room", "life_sq", "kitch_sq", "floor", "timestamp", "state", "max_floor",
             "build_year", "material", "industrial_km", "cafe_count_5000_price_high", "cafe_count_2000",
             "public_transport_station_km", "sport_count_3000", "catering_km", "fitness_km", "kindergarten_km",
@@ -88,41 +86,44 @@ macro_dropped = [
     "provision_retail_space_modern_sqm", ]
 
 
-def get_importance_plot():
-    X, y = data_analyzing.get_data()
+# import data_analyzing
 
-    # X = X.drop(selected, axis=1)
-    # X = X.drop(maybe_dropped, axis=1)
-    # X = X.drop(dropped, axis=1)
-    X = X.drop(macro_dropped, axis=1)
-
-    # Build a forest and compute the feature importances
-    forest = ExtraTreesRegressor(n_estimators=250, random_state=0, n_jobs=-1)
-    forest.fit(X, y)
-
-    importances = forest.feature_importances_
-    std = np.std([tree.feature_importances_ for tree in forest.estimators_],
-                 axis=0)
-    indices = np.argsort(importances)[::-1]
-
-    # Print the feature ranking
-    print("Feature ranking:")
-
-    colors = ["r" if X.columns[i] in selected else "g" for i in indices]
-
-    for f in range(X.shape[1]):
-        print("%d. feature %d (%s, color: %s) : %f" % (
-            f + 1, indices[f], X.columns[indices[f]], colors[f], importances[indices[f]]))
-
-    # Plot the feature importances of the forest
-    plt.figure()
-    plt.title("Feature importances")
-    plt.bar(range(X.shape[1]), importances[indices],
-            color=colors, align="center")
-    plt.xticks(range(X.shape[1]), indices)
-    plt.xlim([-1, X.shape[1]])
-    plt.show()
-
-
-if __name__ == '__main__':
-    get_importance_plot()
+# def get_importance_plot():
+#     X, y = data_analyzing.get_data()
+#
+#     # X = X.drop(selected, axis=1)
+#     # X = X.drop(maybe_dropped, axis=1)
+#     # X = X.drop(dropped, axis=1)
+#     X = X.drop(macro_dropped, axis=1)
+#
+#     # Build a forest and compute the feature importances
+#     forest = ExtraTreesRegressor(n_estimators=250, random_state=0, n_jobs=-1)
+#     forest.fit(X, y)
+#
+#     importances = forest.feature_importances_
+#     std = np.std([tree.feature_importances_ for tree in forest.estimators_],
+#                  axis=0)
+#     indices = np.argsort(importances)[::-1]
+#
+#     # Print the feature ranking
+#     print("Feature ranking:")
+#
+#     colors = ["r" if X.columns[i] in selected else "g" for i in indices]
+#
+#     for f in range(X.shape[1]):
+#         print("%d. feature %d (%s, color: %s) : %f" % (
+#             f + 1, indices[f], X.columns[indices[f]], colors[f], importances[indices[f]]))
+#
+#     # Plot the feature importances of the forest
+#     plt.figure()
+#     plt.title("Feature importances")
+#     plt.bar(range(X.shape[1]), importances[indices],
+#             color=colors, align="center")
+#     plt.xticks(range(X.shape[1]), indices)
+#     plt.xlim([-1, X.shape[1]])
+#     plt.show()
+#
+#
+# if __name__ == '__main__':
+#     get_importance_plot()
+#

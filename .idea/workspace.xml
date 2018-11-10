@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ddf3772-7f3f-49e9-8175-aae735c4796e" name="Default" comment=".idea">
-      <change afterPath="$PROJECT_DIR$/solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aml_regression_kaggle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aml_regression_kaggle.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="2ddf3772-7f3f-49e9-8175-aae735c4796e" name="Default" comment="solution.csv 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Regression demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Regression demo.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_analyzing.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_analyzing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feature_selection.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_selection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution.csv" beforeDir="false" afterPath="$PROJECT_DIR$/solution.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,9 +15,9 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/regression_kaggle$main.coverage" NAME="main Coverage Results" MODIFIED="1541870022379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/regression_kaggle$data_analyzing.coverage" NAME="data_analyzing Coverage Results" MODIFIED="1541884059343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/regression_kaggle$data_analyzing.coverage" NAME="data_analyzing Coverage Results" MODIFIED="1541886460737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/regression_kaggle$xgBoosting.coverage" NAME="xgBoosting Coverage Results" MODIFIED="1541879751861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/regression_kaggle$solution.coverage" NAME="solution Coverage Results" MODIFIED="1541884893717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/regression_kaggle$solution.coverage" NAME="solution Coverage Results" MODIFIED="1541886249142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/regression_kaggle$lightgbm_test.coverage" NAME="lightgbm_test Coverage Results" MODIFIED="1541869560200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/regression_kaggle$feature_selection.coverage" NAME="feature_selection Coverage Results" MODIFIED="1541884386414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -50,7 +47,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="4" />
+          <entry key="csv" value="5" />
           <entry key="gitignore" value="1" />
           <entry key="ipynb" value="6" />
           <entry key="py" value="52" />
@@ -59,7 +56,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="4" />
+          <entry key="CSV" value="5" />
           <entry key="IPNB" value="6" />
           <entry key="PLAIN_TEXT" value="11" />
           <entry key="Python" value="52" />
@@ -70,14 +67,14 @@
           <entry key="Python Console" value="71" />
           <entry key="dummy" value="15" />
           <entry key="gitignore" value="9" />
-          <entry key="py" value="2485" />
-          <entry key="txt" value="123" />
+          <entry key="py" value="2577" />
+          <entry key="txt" value="152" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="147" />
-          <entry key="Python" value="2556" />
+          <entry key="PLAIN_TEXT" value="176" />
+          <entry key="Python" value="2648" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -104,21 +101,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/solution.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+            <state relative-caret-position="69">
+              <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
               <folding>
                 <element signature="e#1#47#0" expanded="true" />
-                <marker date="1541884555468" expanded="true" signature="747:1237" ph="..." />
+                <marker date="1541885155026" expanded="true" signature="747:1237" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/data_dictionary.txt">
+        <entry file="file://$PROJECT_DIR$/solution.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5253">
-              <caret line="309" column="3" selection-start-line="309" selection-end-line="309" selection-end-column="3" />
+            <state relative-caret-position="272">
+              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -126,11 +123,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data_analyzing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+            <state relative-caret-position="1">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
-                <marker date="1541884946704" expanded="true" signature="2324:2329" ph="..." />
+                <marker date="1541886249130" expanded="true" signature="2323:2328" ph="..." />
               </folding>
             </state>
           </provider>
@@ -156,8 +153,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/feature_selection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+            <state relative-caret-position="1462">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -238,9 +235,9 @@
         <option value="$PROJECT_DIR$/lightgbm.py" />
         <option value="$PROJECT_DIR$/lightgbm_test.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/feature_selection.py" />
         <option value="$PROJECT_DIR$/xgBoosting.py" />
         <option value="$PROJECT_DIR$/solution.py" />
+        <option value="$PROJECT_DIR$/feature_selection.py" />
         <option value="$PROJECT_DIR$/data_analyzing.py" />
       </list>
     </option>
@@ -306,7 +303,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.solution">
+  <component name="RunManager" selected="Python.data_analyzing">
     <configuration name="data_analyzing" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="aml_regression_kaggle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -426,9 +423,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_analyzing" />
         <item itemvalue="Python.solution" />
         <item itemvalue="Python.feature_selection" />
-        <item itemvalue="Python.data_analyzing" />
         <item itemvalue="Python.lightgbm_test" />
         <item itemvalue="Python.xgBoosting" />
       </list>
@@ -501,7 +498,28 @@
       <option name="project" value="LOCAL" />
       <updated>1541880337695</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="solution">
+      <created>1541885166792</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1541885166792</updated>
+    </task>
+    <task id="LOCAL-00010" summary="solution.csv">
+      <created>1541885191511</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1541885191511</updated>
+    </task>
+    <task id="LOCAL-00011" summary="solution.csv 2">
+      <created>1541885473494</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1541885473494</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -599,7 +617,10 @@
     <MESSAGE value="xgb test" />
     <MESSAGE value="lightgbm test" />
     <MESSAGE value="RForest tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="RForest tests" />
+    <MESSAGE value="solution" />
+    <MESSAGE value="solution.csv" />
+    <MESSAGE value="solution.csv 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="solution.csv 2" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files/Python36/Lib/site-packages/sklearn/feature_selection/rfe.py" />
@@ -690,16 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xgBoosting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1529">
@@ -717,10 +728,20 @@
     <entry file="file://$PROJECT_DIR$/data/test.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/xgBoosting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/feature_selection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+        <state relative-caret-position="1462">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -729,22 +750,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        <state relative-caret-position="69">
+          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
           <folding>
             <element signature="e#1#47#0" expanded="true" />
-            <marker date="1541884555468" expanded="true" signature="747:1237" ph="..." />
+            <marker date="1541885155026" expanded="true" signature="747:1237" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solution.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data_analyzing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        <state relative-caret-position="1">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-            <marker date="1541884946704" expanded="true" signature="2324:2329" ph="..." />
+            <marker date="1541886249130" expanded="true" signature="2323:2328" ph="..." />
           </folding>
         </state>
       </provider>
