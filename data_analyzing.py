@@ -1,15 +1,27 @@
+from datetime import datetime
+
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
 
-Z_train = pd.read_csv('data/train.csv')
-Z_test = pd.read_csv('data/test.csv')
+Z_train = pd.read_csv('data/train.csv', index_col='id')
+Z_test = pd.read_csv('data/test.csv', index_col='id')
 
 Y = Z_train['price']
 X = Z_train.drop('price', axis=1)
 
-# Drop string columns
-X = X.drop(['ecology', 'sub_area', 'product_type', 'timestamp'], axis=1)
+# Drop or encode string columns
+# transform timestamp to milliseconds
+X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
+
+X['ecology'] = pd.get_dummies(X['ecology'])
+X['product_type'] = pd.get_dummies(X['product_type'])
+X = X.drop(['sub_area'], axis=1)
+
+# # Take parameters without neighbours and macro
+# X = X.loc[:, ['full_sq', 'life_sq', 'floor', 'max_floor', 'material',
+#               'build_year', 'num_room', 'kitch_sq', 'state', 'area_m']]
 
 # Boolean values
 boolean_parametrs = ['culture_objects_top_25', 'thermal_power_plant_raion', 'incineration_raion',
@@ -24,6 +36,11 @@ for column in X.columns:
     X[column] = X[column].fillna((X[column].mean()))
 
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3)
+
+
+def get_normalised_data():
+    X_scaled = preprocessing.MinMaxScaler().fit_transform(X.values)
+    return train_test_split(pd.DataFrame(X_scaled), Y, test_size=0.3)
 
 
 def get_train_data():
