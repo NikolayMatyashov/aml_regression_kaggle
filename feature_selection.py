@@ -60,7 +60,7 @@ dropped = ["build_count_before_1920", "build_count_1921-1945", "build_count_1946
 
 
 macro_selected = [
-    "micex", "brent", "micex_cbi_tr", "rts", "micex_rgbi_tr", "eurrub", "usdrub",
+    'timestamp', "micex", "brent", "micex_cbi_tr", "rts", "micex_rgbi_tr", "eurrub", "usdrub",
 ]
 
 macro_maybe_dropped = [

@@ -31,12 +31,9 @@ boolean_parametrs = ['culture_objects_top_25', 'thermal_power_plant_raion', 'inc
 for boolean_parametr in boolean_parametrs:
     X[boolean_parametr] = X[boolean_parametr].map(lambda x: 0 if 'no' or '' else 1)
 
-X = X[feature_selection.selected]
-X = X.merge(macro, on=['timestamp'], how='inner')
+macro = macro.drop(['child_on_acc_pre_school', 'modern_education_share','old_education_build_share'], axis=1)
+X = X.merge(macro[feature_selection.macro_selected], on=['timestamp'], how='inner')
 
-# Drop bugged features after merge
-X = X.drop(['child_on_acc_pre_school', 'modern_education_share',
-            'old_education_build_share'], axis=1)
 
 # transform timestamp to milliseconds
 X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
@@ -45,6 +42,7 @@ X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").t
 for column in X.columns:
     X[column] = X[column].fillna((X[column].mean()))
 
+X = X[feature_selection.selected + feature_selection.macro_selected]
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3)
 
 
