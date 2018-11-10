@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import pandas as pd
+from sklearn.decomposition import PCA
 
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
@@ -44,14 +45,16 @@ for boolean_parametr in boolean_parametrs:
 for column in X.columns:
     X[column] = X[column].fillna((X[column].mean()))
 
-X = X[feature_selection.selected + feature_selection.macro_selected
-      + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+X = X[feature_selection.selected + feature_selection.macro_selected + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+#X = preprocessing.MinMaxScaler().fit_transform(X.values)
+# pca = PCA(n_components='mle')
+# X = pca.fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3)
 
 
+
 def get_normalised_data():
-    X_scaled = preprocessing.MinMaxScaler().fit_transform(X.values)
-    return train_test_split(pd.DataFrame(X_scaled), Y, test_size=0.3)
+    return train_test_split(pd.DataFrame(X), Y, test_size=0.3)
 
 
 def get_train_data():

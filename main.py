@@ -48,7 +48,7 @@ def test_models(X_train, X_test, y_train, y_test):
     # print('MAE for Decision tree : %.3f' % MAE)
 
     # # criterion: mae,mse
-    m = RandomForestRegressor(max_features=0.91, n_estimators=20, bootstrap=True, criterion='mae', max_depth=8, n_jobs=-1)
+    m = RandomForestRegressor(n_estimators=20, bootstrap=True, criterion='mae', max_depth=8, n_jobs=-1)
     m.fit(X_train, y_train)
     Y_hat = m.predict(X_test)
     MAE = np.mean(abs(Y_hat - y_test))
