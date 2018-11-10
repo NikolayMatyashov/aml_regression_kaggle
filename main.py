@@ -12,26 +12,26 @@ import numpy as np
 
 
 def test_models(X_train, X_test, y_train, y_test):
-    xgb = xgboost.XGBRegressor(n_estimators=100, learning_rate=0.08, gamma=0, subsample=0.75,
-                               colsample_bytree=1, max_depth=7)
-    xgb.fit(X_train, y_train)
-    Y_hat = xgb.predict(X_test)
-    MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for XGBRegressor : %.3f' % MAE)
+    # xgb = xgboost.XGBRegressor(n_estimators=100, learning_rate=0.08, gamma=0, subsample=0.75,
+    #                            colsample_bytree=1, max_depth=7)
+    # xgb.fit(X_train, y_train)
+    # Y_hat = xgb.predict(X_test)
+    # MAE = np.mean(abs(Y_hat - y_test))
+    # print('MAE for XGBRegressor : %.3f' % MAE)
 
-    # alpha: 0.001, 0.5, 50, 1000
-    m = Ridge(alpha=0.001)
-    m.fit(X_train, y_train)
-    Y_hat = m.predict(X_test)
-    MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Ridge : %.3f' % MAE)
+    # # alpha: 0.001, 0.5, 50, 1000
+    # m = Ridge(alpha=0.001)
+    # m.fit(X_train, y_train)
+    # Y_hat = m.predict(X_test)
+    # MAE = np.mean(abs(Y_hat - y_test))
+    # print('MAE for Ridge : %.3f' % MAE)
 
-    # alpha: 0.001, 0.5, 50, 1000
-    m = Lasso(alpha=0.5)
-    m.fit(X_train, y_train)
-    Y_hat = m.predict(X_test)
-    MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Lasso : %.3f' % MAE)
+    # # alpha: 0.001, 0.5, 50, 1000
+    # m = Lasso(alpha=0.5)
+    # m.fit(X_train, y_train)
+    # Y_hat = m.predict(X_test)
+    # MAE = np.mean(abs(Y_hat - y_test))
+    # print('MAE for Lasso : %.3f' % MAE)
 
     # # kernel='poly', degree=1,2,5
     # # kernel='rbf', gamma=0.1, 1, 5, 10
@@ -41,18 +41,18 @@ def test_models(X_train, X_test, y_train, y_test):
     # MAE = np.mean(abs(Y_hat - y_test))
     # print('MAE for Kernel ridge regression : %.3f' % MAE)
 
-    m = DecisionTreeRegressor(max_depth=8)
-    m.fit(X_train, y_train)
-    Y_hat = m.predict(X_test)
-    MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Decision tree : %.3f' % MAE)
-
-    # # criterion: mae,mse
-    # m = RandomForestRegressor(max_features=0.91, n_estimators=20, bootstrap=True, criterion='mae')
+    # m = DecisionTreeRegressor(max_depth=8)
     # m.fit(X_train, y_train)
     # Y_hat = m.predict(X_test)
     # MAE = np.mean(abs(Y_hat - y_test))
-    # print('MAE for Random forest : %.3f' % MAE)
+    # print('MAE for Decision tree : %.3f' % MAE)
+
+    # # criterion: mae,mse
+    m = RandomForestRegressor(max_features=0.91, n_estimators=20, bootstrap=True, criterion='mae', max_depth=8, n_jobs=-1)
+    m.fit(X_train, y_train)
+    Y_hat = m.predict(X_test)
+    MAE = np.mean(abs(Y_hat - y_test))
+    print('MAE for Random forest : %.3f' % MAE)
 
     # # n_estimators: 1,3,5, 100,500
     # # learning_rate: 1, 0.1, 0.01
