@@ -1,31 +1,34 @@
 from sklearn.model_selection import GridSearchCV
 
+from xgboost import XGBRegressor
 import data_analyzing
-from sklearn.tree import DecisionTreeRegressor
 import numpy as np
 
-N = 6
+N = 7
 
 X_train, X_test, y_train, y_test = data_analyzing.get_normalised_data()
 
 
 def run():
-    m = DecisionTreeRegressor(max_depth=N)
+    m = XGBRegressor(n_estimators=100, learning_rate=0.08, gamma=0, subsample=0.75,
+                               colsample_bytree=1, max_depth=8)
     m.fit(X_train, y_train)
     Y_hat = m.predict(X_test)
     MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Decision tree : %.3f' % MAE)
+    print('MAE for XGBRegressor : %.3f' % MAE)
 
 
 def cv():
-    tuned_parameters = [{'max_depth': [4, 5, 6, 7, 8, 9, 10]}]
+    tuned_parameters = [{'n_estimators': [10],
+                         'learning_rate': [0.5],
+                         'gamma': [0],
+                         'subsample': [0.75],
+                         'colsample_bytree': [1],
+                         'max_depth': [7]}]
 
     score = 'neg_mean_absolute_error'
 
-    print("# Tuning hyper-parameters for %s" % score)
-    print()
-
-    clf = GridSearchCV(DecisionTreeRegressor(), tuned_parameters, cv=5,
+    clf = GridSearchCV(XGBRegressor(), tuned_parameters, cv=5,
                        scoring=score, n_jobs=4)
     clf.fit(X_train, y_train)
 
@@ -43,7 +46,7 @@ def cv():
     print()
     y_true, y_pred = y_test, clf.predict(X_test)
     MAE = np.mean(abs(y_pred - y_true))
-    print('MAE for Decision tree : %.3f' % MAE)
+    print('MAE for XGBRegressor : %.3f' % MAE)
     print()
 
 

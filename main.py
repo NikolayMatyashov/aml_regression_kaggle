@@ -1,3 +1,4 @@
+import xgboost
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import Ridge, Lasso, LogisticRegression
 from sklearn.kernel_ridge import KernelRidge
@@ -11,7 +12,12 @@ import numpy as np
 
 
 def test_models(X_train, X_test, y_train, y_test):
-    # X_train, X_test, y_train, y_test = data_analyzing.get_train_data()
+    xgb = xgboost.XGBRegressor(n_estimators=100, learning_rate=0.08, gamma=0, subsample=0.75,
+                               colsample_bytree=1, max_depth=7)
+    xgb.fit(X_train, y_train)
+    Y_hat = xgb.predict(X_test)
+    MAE = np.mean(abs(Y_hat - y_test))
+    print('MAE for XGBRegressor : %.3f' % MAE)
 
     # alpha: 0.001, 0.5, 50, 1000
     m = Ridge(alpha=0.001)
@@ -96,7 +102,9 @@ if __name__ == '__main__':
     # find_important_parameters(model, X, y)
 
     X_train, X_test, y_train, y_test = data_analyzing.get_normalised_data()
-    for i in range(0, 9):
-        print('Iteration %d' % (i + 1))
-        test_models(X_train.iloc[:, i:(i + 32)], X_test.iloc[:, i:(i + 32)], y_train, y_test)
-        print()
+    test_models(X_train, X_test, y_train, y_test)
+
+    # for i in range(0, 9):
+    #     print('Iteration %d' % (i + 1))
+    #     test_models(X_train.iloc[:, i:(i + 32)], X_test.iloc[:, i:(i + 32)], y_train, y_test)
+    #     print()

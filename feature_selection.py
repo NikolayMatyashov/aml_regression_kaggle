@@ -5,9 +5,6 @@ from sklearn.ensemble import ExtraTreesRegressor
 
 import data_analyzing
 
-# Build a classification task using 3 informative features
-X, y = data_analyzing.get_data()
-
 selected = ["full_sq", "num_room", "life_sq", "kitch_sq", "floor", "timestamp", "state", "max_floor",
             "build_year", "material", "industrial_km", "cafe_count_5000_price_high", "cafe_count_2000",
             "public_transport_station_km", "sport_count_3000", "catering_km", "fitness_km", "kindergarten_km",
@@ -60,31 +57,35 @@ dropped = ["build_count_before_1920", "build_count_1921-1945", "build_count_1946
            "bulvar_ring_km", "market_count_2000", "additional_education_raion", "shopping_centers_raion",
            "ID_railroad_terminal", "cafe_count_2000_price_high"
            ]
-# features =
-X = X.drop(selected, axis=1)
-X = X.drop(maybe_dropped, axis=1)
-X = X.drop(dropped, axis=1)
 
-# Build a forest and compute the feature importances
-forest = ExtraTreesRegressor(n_estimators=250, random_state=0, n_jobs=-1)
-forest.fit(X, y)
 
-importances = forest.feature_importances_
-std = np.std([tree.feature_importances_ for tree in forest.estimators_],
-             axis=0)
-indices = np.argsort(importances)[::-1]
+def get_importance_plot():
+    X, y = data_analyzing.get_data()
 
-# Print the feature ranking
-print("Feature ranking:")
+    X = X.drop(selected, axis=1)
+    X = X.drop(maybe_dropped, axis=1)
+    X = X.drop(dropped, axis=1)
 
-for f in range(X.shape[1]):
-    print("%d. feature %d (%s) : %f" % (f + 1, indices[f], X.columns[indices[f]], importances[indices[f]]))
+    # Build a forest and compute the feature importances
+    forest = ExtraTreesRegressor(n_estimators=250, random_state=0, n_jobs=-1)
+    forest.fit(X, y)
 
-# Plot the feature importances of the forest
-plt.figure()
-plt.title("Feature importances")
-plt.bar(range(X.shape[1]), importances[indices],
-        color="r", align="center")
-plt.xticks(range(X.shape[1]), indices)
-plt.xlim([-1, X.shape[1]])
-plt.show()
+    importances = forest.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in forest.estimators_],
+                 axis=0)
+    indices = np.argsort(importances)[::-1]
+
+    # Print the feature ranking
+    print("Feature ranking:")
+
+    for f in range(X.shape[1]):
+        print("%d. feature %d (%s) : %f" % (f + 1, indices[f], X.columns[indices[f]], importances[indices[f]]))
+
+    # Plot the feature importances of the forest
+    plt.figure()
+    plt.title("Feature importances")
+    plt.bar(range(X.shape[1]), importances[indices],
+            color="r", align="center")
+    plt.xticks(range(X.shape[1]), indices)
+    plt.xlim([-1, X.shape[1]])
+    plt.show()
