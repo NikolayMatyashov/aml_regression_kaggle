@@ -15,9 +15,9 @@ X = Z_train.drop('price', axis=1)
 # transform timestamp to milliseconds
 X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
 
-X['ecology'] = pd.get_dummies(X['ecology'])
-X['product_type'] = pd.get_dummies(X['product_type'])
-X = X.drop(['sub_area'], axis=1)
+X = X.join(pd.get_dummies(X['ecology'], prefix="ecology", drop_first=True))
+X = X.join(pd.get_dummies(X['product_type'], prefix="product_type", drop_first=True))
+X = X.drop(['ecology', 'product_type', 'sub_area'], axis=1)
 
 # # Take parameters without neighbours and macro
 # X = X.loc[:, ['full_sq', 'life_sq', 'floor', 'max_floor', 'material',

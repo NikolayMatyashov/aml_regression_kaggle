@@ -8,10 +8,11 @@ import data_analyzing
 # Build a classification task using 3 informative features
 X, y = data_analyzing.get_data()
 
-selected = ["full_sq", "num_room", "life_sq", "kitch_sq", "floor", "product_type", "timestamp", "state", "max_floor",
+selected = ["full_sq", "num_room", "life_sq", "kitch_sq", "floor", "timestamp", "state", "max_floor",
             "build_year", "material", "industrial_km", "cafe_count_5000_price_high", "cafe_count_2000",
             "public_transport_station_km", "sport_count_3000", "catering_km", "fitness_km", "kindergarten_km",
-            "prom_part_1500", "trc_sqm_500", "office_sqm_5000", "green_part_500", "trc_count_3000"
+            "prom_part_1500", "trc_sqm_500", "office_sqm_5000", "green_part_500", "trc_count_3000",
+            "product_type_OwnerOccupier"
             ]
 
 maybe_dropped = [
@@ -31,7 +32,7 @@ dropped = ["build_count_before_1920", "build_count_1921-1945", "build_count_1946
            "ekder_female", "16_29_all", "work_all", "mosque_count_2000", "ekder_male", "0_17_male", "0_6_all",
            "build_count_frame", "male_f", "mosque_count_1000", "female_f", "0_13_male", "ekder_all", "build_count_wood",
            "full_all", "mosque_count_1500", "children_preschool", "7_14_all", "16_29_male", "0_17_all", "0_13_female",
-           "16_29_female", "young_male", "children_school", "0_17_female", "ecology", "build_count_mix",
+           "16_29_female", "young_male", "children_school", "0_17_female", "build_count_mix",
            "build_count_foam", "mosque_count_500", "water_1line", "culture_objects_top_25", "thermal_power_plant_raion",
            "big_road1_1line", "incineration_raion", "oil_chemistry_raion", "radiation_raion", "railroad_1line",
            "railroad_terminal_raion", "big_market_raion", "nuclear_reactor_raion", "detention_facility_raion",
