@@ -59,12 +59,42 @@ dropped = ["build_count_before_1920", "build_count_1921-1945", "build_count_1946
            ]
 
 
+macro_selected = [
+    "micex", "brent", "micex_cbi_tr", "rts", "micex_rgbi_tr", "eurrub", "usdrub",
+]
+
+macro_maybe_dropped = [
+    "balance_trade", "income_per_cap", "rent_price_4+room_bus", "net_capital_export",
+    "rent_price_1room_bus", "deposits_growth", "rent_price_3room_eco", "rent_price_2room_eco", "rent_price_3room_bus",
+    "mortgage_rate", "mortgage_value", "rent_price_2room_bus", "rent_price_1room_eco", "deposits_rate", "oil_urals",
+    "ppi", "mortgage_growth", "average_provision_of_build_contract_moscow", "balance_trade_growth", "deposits_value",
+    "average_provision_of_build_contract", "fixed_basket", "gdp_quart", "cpi", "gdp_quart_growth", ]
+
+macro_dropped = [
+    "divorce_rate", "apartment_fund_sqm", "mortality", "invest_fixed_assets_phys", "grp", "housing_fund_sqm",
+    "unemployment", "salary_growth", "grp_growth", "profitable_enterpr_share", "infant_mortarity_per_1000_cap",
+    "unprofitable_enterpr_share", "share_own_revenues", "seats_theather_rfmin_per_100000_cap",
+    "invest_fixed_capital_per_cap", "overdue_wages_per_cap", "bandwidth_sports", "hospital_bed_occupancy_per_year",
+    "sewerage_share", "population_reg_sports_share", "power_clinics", "hospital_beds_available_per_cap",
+    "construction_value", "perinatal_mort_per_1000_cap", "pop_natural_increase", "provision_nurse", "gas_share",
+    "salary", "load_of_teachers_school_per_teacher", "students_state_oneshift", "retail_trade_turnover", "gdp_annual",
+    "provision_doctors", "invest_fixed_assets", "gdp_deflator", "average_life_exp", "marriages_per_1000_cap",
+    "real_dispos_income_per_cap_growth", "load_on_doctors", "electric_stove_share", "incidence_population",
+    "labor_force", "lodging_sqm_per_cap", "turnover_catering_per_cap", "pop_migration", "museum_visitis_per_100_cap",
+    "employment", "apartment_build", "pop_total_inc", "fin_res_per_cap", "load_of_teachers_preschool_per_teacher",
+    "retail_trade_turnover_growth", "students_reg_sports_share", "retail_trade_turnover_per_cap",
+    "theaters_viewers_per_1000_cap", "gdp_annual_growth", "baths_share", "hot_water_share",
+    "provision_retail_space_sqm", "childbirth", "old_house_share", "heating_share", "water_pipes_share",
+    "provision_retail_space_modern_sqm", ]
+
+
 def get_importance_plot():
     X, y = data_analyzing.get_data()
 
-    X = X.drop(selected, axis=1)
-    X = X.drop(maybe_dropped, axis=1)
-    X = X.drop(dropped, axis=1)
+    # X = X.drop(selected, axis=1)
+    # X = X.drop(maybe_dropped, axis=1)
+    # X = X.drop(dropped, axis=1)
+    X = X.drop(macro_dropped, axis=1)
 
     # Build a forest and compute the feature importances
     forest = ExtraTreesRegressor(n_estimators=250, random_state=0, n_jobs=-1)
@@ -78,14 +108,21 @@ def get_importance_plot():
     # Print the feature ranking
     print("Feature ranking:")
 
+    colors = ["r" if X.columns[i] in selected else "g" for i in indices]
+
     for f in range(X.shape[1]):
-        print("%d. feature %d (%s) : %f" % (f + 1, indices[f], X.columns[indices[f]], importances[indices[f]]))
+        print("%d. feature %d (%s, color: %s) : %f" % (
+            f + 1, indices[f], X.columns[indices[f]], colors[f], importances[indices[f]]))
 
     # Plot the feature importances of the forest
     plt.figure()
     plt.title("Feature importances")
     plt.bar(range(X.shape[1]), importances[indices],
-            color="r", align="center")
+            color=colors, align="center")
     plt.xticks(range(X.shape[1]), indices)
     plt.xlim([-1, X.shape[1]])
     plt.show()
+
+
+if __name__ == '__main__':
+    get_importance_plot()
