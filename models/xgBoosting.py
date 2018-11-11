@@ -68,6 +68,11 @@ def cv_score():
     print(cros_val_sores)
 
 
+def plot_errors(model):
+
+    pass
+
+
 if __name__ == '__main__':
     # grid_search()
     single_run()
