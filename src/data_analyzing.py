@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 import pandas as pd
@@ -37,42 +38,46 @@ def prepare_x(X):
     for column in X.columns:
         X[column] = X[column].fillna((X[column].mean()))
 
-    # Delete all features that has no or small effect on output
-    X = X[feature_selection.selected + feature_selection.macro_selected
-          + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
-
     return X
 
 
 # Merge test input with macro data
-macro = pd.read_csv('data/macro.csv')
-Z_test = pd.read_csv('data/test.csv').merge(macro, on=['timestamp'], how='inner')
-Z_test = Z_test.set_index("id").sort_index()
+macro = pd.read_csv(r'../data/macro.csv')
 
 # Merge train input with macro data
-macro2 = pd.read_csv('data/macro.csv')
-Z_train = pd.read_csv('data/train.csv', index_col='id').merge(macro2, on=['timestamp'], how='inner')
-train_Y = Z_train['price']
-Z_train = Z_train.drop('price', axis=1)
+Z_train = pd.read_csv(r'../data/train.csv', index_col='id').merge(macro, on=['timestamp'], how='inner')
+Y_train = Z_train['price']
 
 # Prepare test and train inputs
-X_prepared = prepare_x(Z_train)
-X_test_prepared = prepare_x(Z_test)
+X_prepared = prepare_x(Z_train.drop('price', axis=1))
 
 
 # --- Getters ---
 def get_normalised_data():
-    X_scaled = preprocessing.MinMaxScaler().fit_transform(X_prepared.values)
-    return train_test_split(pd.DataFrame(X_scaled), train_Y, test_size=0.3)
+    return get_data(normalise=True, with_test_split=True)
 
 
 def get_train_data():
-    return train_test_split(X_prepared, train_Y, test_size=0.3)
+    return get_data(with_test_split=True)
 
 
-def get_data():
-    return X_prepared, train_Y
+def get_data(normalise=False, only_important_features=True, with_test_split=False):
+    X = X_prepared
+    y = Y_train
+    if only_important_features:
+        X = X[feature_selection.selected + feature_selection.macro_selected
+              + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+    if normalise:
+        X = pd.DataFrame(preprocessing.MinMaxScaler().fit_transform(X.values))
+
+    if with_test_split:
+        return train_test_split(X, y, 0.3)
+    else:
+        return X, y
 
 
 def get_test_data():
-    return X_test_prepared
+    Z_test = pd.read_csv(r'../data/test.csv').merge(macro, on=['timestamp'], how='inner')
+    Z_test = Z_test.set_index("id").sort_index()
+
+    return prepare_x(Z_test)
