@@ -1,15 +1,18 @@
+import numpy
 from datetime import datetime
 
 import pandas as pd
+from sklearn.ensemble import AdaBoostRegressor
 
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.tree import DecisionTreeRegressor
 
 import feature_selection
 
 
 def prepare_x(X):
-    print(X)
     # Drop or encode string columns
     # transform timestamp to milliseconds
     X['timestamp'] = X['timestamp'].map(lambda t: datetime.strptime(t, "%Y-%m-%d").timestamp())
@@ -41,11 +44,11 @@ def prepare_x(X):
 
 
 macro = pd.read_csv('data/macro.csv')
-
 Z_test = pd.read_csv('data/test.csv').merge(macro, on=['timestamp'], how='inner')
 Z_test = Z_test.set_index("id").sort_index()
 
-Z_train = pd.read_csv('data/train.csv', index_col='id').merge(macro, on=['timestamp'], how='inner')
+macro2 = pd.read_csv('data/macro.csv')
+Z_train = pd.read_csv('data/train.csv', index_col='id').merge(macro2, on=['timestamp'], how='inner')
 train_Y = Z_train['price']
 Z_train = Z_train.drop('price', axis=1)
 
@@ -67,3 +70,36 @@ def get_data():
 
 def get_test_data():
     return X_test_prepared
+
+
+# def cv_score():
+#     m = AdaBoostRegressor(base_estimator=DecisionTreeRegressor(max_depth=30, criterion='friedman_mse'),
+#                           n_estimators=50, learning_rate=0.5, loss='square')
+#     X, y = data_analyzing.get_data()
+#     X = MinMaxScaler().fit_transform(X.values)
+#     cros_val_sores = cross_val_score(m, X, y, scoring='neg_mean_absolute_error', cv=5, n_jobs=-1)
+#     print("Average score: %.3f" % np.mean(cros_val_sores))
+#     print(cros_val_sores)
+#
+
+def generate_solution():
+
+    scaler = MinMaxScaler()
+    scaler.fit(X_prepared.values)
+    X_train = scaler.transform(X_prepared.values)
+    model = AdaBoostRegressor(base_estimator=DecisionTreeRegressor(max_depth=30, criterion='friedman_mse'),
+                              n_estimators=50, learning_rate=0.5, loss='square')
+
+    model.fit(X_train, train_Y)
+    index = X_test_prepared.index
+    X_test = scaler.transform(X_test_prepared.values)
+    Y_hat = model.predict(X_test)
+
+    S = pd.DataFrame(Y_hat, columns=['price'], index=index)
+    print(S.head())
+    S.to_csv('solution.csv')
+
+
+if __name__ == '__main__':
+    # cv_score()
+    generate_solution()
