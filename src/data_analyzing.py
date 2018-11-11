@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-from src import feature_selection
+from src import filtered_features
 
 
 def prepare_x(X):
@@ -55,8 +55,8 @@ def get_train_data(normalise=False, only_important_features=True, with_test_spli
     X = X_prepared
     y = Y_train
     if only_important_features:
-        X = X[feature_selection.selected + feature_selection.macro_selected
-              + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+        X = X[filtered_features.selected + filtered_features.macro_selected
+              + filtered_features.macro_maybe_dropped + filtered_features.maybe_dropped]
     if normalise:
         X = pd.DataFrame(preprocessing.MinMaxScaler().fit_transform(X.values))
 
@@ -72,7 +72,7 @@ def get_test_data(only_important_features=True):
     X_test = prepare_x(X_test)
 
     if only_important_features:
-        X_test = X_test[feature_selection.selected + feature_selection.macro_selected
-                        + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+        X_test = X_test[filtered_features.selected + filtered_features.macro_selected
+                        + filtered_features.macro_maybe_dropped + filtered_features.maybe_dropped]
 
     return X_test
