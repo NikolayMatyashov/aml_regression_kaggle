@@ -1,3 +1,4 @@
+from sklearn.ensemble import AdaBoostRegressor
 from sklearn.model_selection import GridSearchCV, cross_val_score
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
@@ -14,21 +15,41 @@ X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True,
 X, y = data_analyzing.get_train_data(normalise=True)
 
 models = {
-    'xgboost': XGBRegressor(),
-    'catboost': CatBoostRegressor(),
-    'decision_tree': DecisionTreeRegressor()
-}
+    'xgboost': {
+        "base_model": XGBRegressor(),
+        "params": {
+            'n_estimators': [100, 200, 300],
+            'learning_rate': [0.05, 0.07, 0.09],
+            'gamma': [0],
+            'subsample': [0.5, 0.75, 0.9],
+            'colsample_bytree': [1],
+            'max_depth': [7, 8, 9, 10]
+        }
+    },
 
-parameters_for_grid = {
-    'xgboost': {'n_estimators': [100, 200, 300],
-                'learning_rate': [0.05, 0.07, 0.09],
-                'gamma': [0],
-                'subsample': [0.5, 0.75, 0.9],
-                'colsample_bytree': [1],
-                'max_depth': [7, 8, 9, 10]},
-    'catboost': {'learning_rate': [0.25, 0.5, 0.75],
-                 'max_depth': [5, 6, 7, 8]},
-    'decision_tree': {'max_depth': [4, 5, 6, 7, 8, 9, 10]}
+    'catboost': {
+        "base_model": CatBoostRegressor(),
+        "params": {'learning_rate': [0.25, 0.5, 0.75], 'max_depth': [5, 6, 7, 8]}
+    },
+
+    'decision_tree': {
+        "base_model": DecisionTreeRegressor(),
+        "params": {'max_depth': [4, 5, 6, 7, 8, 9, 10]}
+    },
+
+    'ada_boost': {
+        "base_model": AdaBoostRegressor(),
+        "params": {
+            'base_estimator': [
+                DecisionTreeRegressor(max_depth=10, criterion='friedman_mse'),
+                DecisionTreeRegressor(max_depth=20, criterion='friedman_mse'),
+                DecisionTreeRegressor(max_depth=30, criterion='friedman_mse'),
+            ],
+            'n_estimators': [10, 25, 50],
+            'learning_rate': [0.5, 0.75, 1.0],
+            'loss': ['linear', 'square', 'exponential'],
+        }
+    }
 }
 
 optimal_parameters = {
@@ -143,7 +164,7 @@ if __name__ == '__main__':
 
     # single_run(models['xgboost'])
 
-    # grid_search(models['xgboost'], parameters_for_grid['xgboost'])
+    grid_search(models['ada_boost']['base_model'], models['ada_boost']['params'], results_to_csv=True)
 
     # cv_score(models['xgboost'])
 
