@@ -1,12 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
-from sklearn import decomposition
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-from src.data_analyzing import get_data
+from src.data_analyzing import get_train_data
 
 parameters = [
     ("Unchanged data", False, False),
@@ -16,7 +13,7 @@ parameters = [
 ]
 
 for title, filter, normalise in parameters:
-    X, y = get_data(only_important_features=filter, normalise=normalise)
+    X, y = get_train_data(only_important_features=filter, normalise=normalise)
     X['y'] = y
 
     clip_size = 2.5

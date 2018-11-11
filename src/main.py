@@ -80,9 +80,9 @@ def cv(model, X, y):
 
 
 if __name__ == '__main__':
-    X, y = data_analyzing.get_data()
+    X, y = data_analyzing.get_train_data()
     model = LogisticRegression()
     find_important_parameters(model, X, y)
 
-    X_train, X_test, y_train, y_test = data_analyzing.get_normalised_data()
+    X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True)
     test_models(X_train, X_test, y_train, y_test)

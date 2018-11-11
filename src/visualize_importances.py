@@ -7,7 +7,7 @@ from src import data_analyzing
 
 
 def get_importance_plot():
-    X, y = data_analyzing.get_data()
+    X, y = data_analyzing.get_train_data()
 
     # X = X.drop(selected, axis=1)
     # X = X.drop(maybe_dropped, axis=1)

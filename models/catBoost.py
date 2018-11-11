@@ -5,7 +5,7 @@ from sklearn.model_selection import GridSearchCV, cross_val_score
 
 from src import data_analyzing
 
-X_train, X_test, y_train, y_test = data_analyzing.get_normalised_data()
+X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True)
 
 
 def single_run():
@@ -56,7 +56,7 @@ def cv_score():
     Performs cross validation on the chosen model and prints mean error and error for each iteration.
     """
     m = CatBoostRegressor(learning_rate=0.25)
-    X, y = data_analyzing.get_data()
+    X, y = data_analyzing.get_train_data()
     X = preprocessing.MinMaxScaler().fit_transform(X.values)
     cros_val_sores = cross_val_score(m, X, y, scoring='neg_mean_absolute_error', cv=5, n_jobs=4)
     print("Average score: %.3f" % np.mean(cros_val_sores))

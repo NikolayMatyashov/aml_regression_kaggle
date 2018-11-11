@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 import pandas as pd
@@ -52,16 +51,7 @@ Y_train = Z_train['price']
 X_prepared = prepare_x(Z_train.drop('price', axis=1))
 
 
-# --- Getters ---
-def get_normalised_data():
-    return get_data(normalise=True, with_test_split=True)
-
-
-def get_train_data():
-    return get_data(with_test_split=True)
-
-
-def get_data(normalise=False, only_important_features=True, with_test_split=False):
+def get_train_data(normalise=False, only_important_features=True, with_test_split=False):
     X = X_prepared
     y = Y_train
     if only_important_features:
@@ -71,13 +61,18 @@ def get_data(normalise=False, only_important_features=True, with_test_split=Fals
         X = pd.DataFrame(preprocessing.MinMaxScaler().fit_transform(X.values))
 
     if with_test_split:
-        return train_test_split(X, y, 0.3)
+        return train_test_split(X, y, test_size=0.3)
     else:
         return X, y
 
 
-def get_test_data():
-    Z_test = pd.read_csv(r'../data/test.csv').merge(macro, on=['timestamp'], how='inner')
-    Z_test = Z_test.set_index("id").sort_index()
+def get_test_data(only_important_features=True):
+    X_test = pd.read_csv(r'../data/test.csv').merge(macro, on=['timestamp'], how='inner')
+    X_test = X_test.set_index("id").sort_index()
+    X_test = prepare_x(X_test)
 
-    return prepare_x(Z_test)
+    if only_important_features:
+        X_test = X_test[feature_selection.selected + feature_selection.macro_selected
+                        + feature_selection.macro_maybe_dropped + feature_selection.maybe_dropped]
+
+    return X_test
