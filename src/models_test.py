@@ -1,6 +1,6 @@
 import numpy as np
 import xgboost
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.neural_network import MLPRegressor
@@ -31,11 +31,11 @@ def test_models(X_train, X_test, y_train, y_test):
     MAE = np.mean(abs(Y_hat - y_test))
     print('MAE for Lasso : %.3f' % MAE)
 
-    m = KernelRidge(alpha=0.0001, kernel='rbf', gamma=1, degree=8)  # linear, poly, rbf
-    m.fit(X_train, y_train)
-    Y_hat = m.predict(X_test)
-    MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Kernel ridge regression : %.3f' % MAE)
+    # m = KernelRidge(alpha=0.0001, kernel='rbf', gamma=1, degree=8)  # linear, poly, rbf
+    # m.fit(X_train, y_train)
+    # Y_hat = m.predict(X_test)
+    # MAE = np.mean(abs(Y_hat - y_test))
+    # print('MAE for Kernel ridge regression : %.3f' % MAE)
 
     m = DecisionTreeRegressor(max_depth=8)
     m.fit(X_train, y_train)
@@ -44,17 +44,17 @@ def test_models(X_train, X_test, y_train, y_test):
     print('MAE for Decision tree : %.3f' % MAE)
 
     # criterion: mae,mse
-    m = RandomForestRegressor(max_features=0.91, n_estimators=20, bootstrap=True, criterion='mae')
+    m = RandomForestRegressor(max_features=0.91, n_estimators=20, bootstrap=True, criterion='mse')
     m.fit(X_train, y_train)
     Y_hat = m.predict(X_test)
     MAE = np.mean(abs(Y_hat - y_test))
     print('MAE for Random forest : %.3f' % MAE)
 
-    m = GradientBoostingRegressor(n_estimators=300, learning_rate=1, max_depth=2, loss='lad')
+    m = AdaBoostRegressor(base_estimator=DecisionTreeRegressor(max_depth=15))
     m.fit(X_train, y_train)
     Y_hat = m.predict(X_test)
     MAE = np.mean(abs(Y_hat - y_test))
-    print('MAE for Gradient Boosting : %.3f' % MAE)
+    print('MAE for Ada Boosting : %.3f' % MAE)
 
     m = MLPRegressor(hidden_layer_sizes=[190, 12], alpha=0.01, max_iter=1000,
                      solver='lbfgs', activation='relu')

@@ -14,7 +14,6 @@ parameters = [
 
 for title, filter, normalise in parameters:
     X, y = get_train_data(only_important_features=filter, normalise=normalise)
-    X['y'] = y
 
     clip_size = 2.5
     colors = StandardScaler().fit_transform(np.array(y).reshape(-1, 1))[:, 0].clip(-clip_size, clip_size) + clip_size
