@@ -164,11 +164,12 @@ if __name__ == '__main__':
 
     # single_run(models['xgboost'])
 
-    grid_search(models['ada_boost']['base_model'], models['ada_boost']['params'], results_to_csv=True)
+    # grid_search(models['ada_boost']['base_model'], models['ada_boost']['params'], results_to_csv=True)
 
     # cv_score(models['xgboost'])
 
-    # plot_parameter_distribution(list(parameters_for_grid['xgboost'].keys())[0],
-    #                             parameters_for_grid['xgboost']['n_estimators'])
+    plot_parameter_distribution(models['xgboost']['base_model'],
+                                list(models['xgboost']['params'])[5],
+                                models['xgboost']['params']['max_depth'])
 
     pass
