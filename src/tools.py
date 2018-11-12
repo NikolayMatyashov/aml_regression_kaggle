@@ -162,14 +162,14 @@ def plot_parameter_distribution(model, chosen_param, tuned_parameters_list):
 if __name__ == '__main__':
     # ---- Uncomment needed tool ----
 
-    # single_run(models['xgboost'])
+    # single_run(models['xgboost']['base_model'])
 
     # grid_search(models['ada_boost']['base_model'], models['ada_boost']['params'], results_to_csv=True)
 
-    # cv_score(models['xgboost'])
+    cv_score(models['xgboost']['base_model'])
 
-    plot_parameter_distribution(models['xgboost']['base_model'],
-                                list(models['xgboost']['params'])[5],
-                                models['xgboost']['params']['max_depth'])
+    # plot_parameter_distribution(models['xgboost']['base_model'],
+    #                             list(models['xgboost']['params'])[5],
+    #                             models['xgboost']['params']['max_depth'])
 
     pass
