@@ -84,5 +84,5 @@ if __name__ == '__main__':
     model = LogisticRegression()
     find_important_parameters(model, X, y)
 
-    X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True)
+    X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True, with_test_split=True)
     test_models(X_train, X_test, y_train, y_test)
