@@ -1,9 +1,8 @@
 import numpy as np
 import xgboost
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, ExtraTreesRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.kernel_ridge import KernelRidge
-from sklearn.linear_model import Ridge, Lasso, LogisticRegression
-from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import Ridge, Lasso
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
 
@@ -65,24 +64,6 @@ def test_models(X_train, X_test, y_train, y_test):
     print('MAE for Multilayer perceptron : %.3f' % MAE)
 
 
-def find_important_parameters(model, X, y):
-    print('--- Important parameters chosen by ExtraTreesClassifier ---')
-    etc = ExtraTreesRegressor()
-    etc.fit(X, y)
-    # display the relative importance of each attribute
-    print(etc.feature_importances_)
-
-
-def cv(model, X, y):
-    cros_val_sores = cross_val_score(model, X, y, cv=5, n_jobs=4)
-    print("Average score: %.3f" % np.mean(cros_val_sores))
-    print(cros_val_sores)
-
-
 if __name__ == '__main__':
-    X, y = data_analyzing.get_train_data()
-    model = LogisticRegression()
-    find_important_parameters(model, X, y)
-
     X_train, X_test, y_train, y_test = data_analyzing.get_train_data(normalise=True)
     test_models(X_train, X_test, y_train, y_test)
